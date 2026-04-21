@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>StarZ Quiz</title>
 
 <style>
@@ -17,20 +17,23 @@ background:
 radial-gradient(1200px 800px at 80% -10%, #1a1f5a 0%, transparent 60%),
 radial-gradient(1000px 700px at -10% 110%, #0a3b2f 0%, transparent 60%),
 #050814;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
 overflow:hidden;
 }
 
 body::after{
 content:"";
 position:fixed;
-inset:0;
+width:100%;
+height:100%;
 background:url("https://www.transparenttextures.com/patterns/stardust.png");
-opacity:.35;
+opacity:.3;
 pointer-events:none;
-z-index:0;
 }
 
-/* ---------- Navbar ---------- */
 .top-right{
 position:absolute;
 top:18px;
@@ -63,41 +66,26 @@ transition:.2s;
 
 .nav-top:hover{
 transform:translateY(-2px);
-border-color:rgba(255,255,255,.22);
 }
 
 .nav-top.active{
 background:#5e72eb;
 }
 
-/* ---------- Main ---------- */
-.wrap{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:24px;
-gap:16px;
-}
-
-.logo{
-font-size:42px;
-margin:0;
-}
-
-.subtitle{
-opacity:.8;
-margin-bottom:10px;
-}
-
-.quiz-card{
-width:min(700px,95%);
-padding:28px;
-border-radius:20px;
-border:1px solid rgba(255,255,255,.12);
+.card{
+width:100%;
+max-width:700px;
 background:rgba(255,255,255,.05);
-text-align:center;
+border:1px solid rgba(255,255,255,.1);
+padding:30px;
+border-radius:20px;
+z-index:1;
+}
+
+h1{text-align:center;margin-top:0}
+.progress{
+opacity:.8;
+margin-bottom:20px;
 }
 
 .question{
@@ -107,8 +95,7 @@ margin-bottom:20px;
 
 .answers{
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
+gap:12px;
 }
 
 .answers button{
@@ -117,13 +104,8 @@ border:none;
 border-radius:14px;
 cursor:pointer;
 font-size:16px;
+background:#1d2348;
 color:#fff;
-background:linear-gradient(
-180deg,
-rgba(255,255,255,.08),
-rgba(255,255,255,.02)
-);
-border:1px solid rgba(255,255,255,.12);
 transition:.2s;
 }
 
@@ -131,73 +113,184 @@ transition:.2s;
 transform:translateY(-2px);
 }
 
-.result{
-margin-top:18px;
-font-size:18px;
-font-weight:600;
-min-height:28px;
+.answers button.selected{
+background:#5e72eb;
 }
 
-@media(max-width:768px){
-.answers{
-grid-template-columns:1fr;
+.nav{
+margin-top:25px;
+display:flex;
+justify-content:space-between;
+gap:10px;
 }
-.logo{
-font-size:32px;
+
+.nav button{
+padding:12px 18px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+background:#5e72eb;
+color:#fff;
+font-size:16px;
 }
-.question{
-font-size:20px;
+
+.result{
+text-align:center;
+font-size:24px;
+line-height:1.8;
 }
+
+.brand{
+position:absolute;
+top:18px;
+left:24px;
+z-index:10;
+text-decoration:none;
+color:#fff;
+font-size:28px;
+font-weight:700;
+letter-spacing:.5px;
+transition:.2s;
 }
+
+.brand:hover{
+transform:translateY(-2px);
+opacity:.9;
+}
+
 </style>
 </head>
-
 <body>
 
-<!-- Navbar -->
+<a href="index.html" class="brand">✨ StarZ ✨</a>
+
 <div class="top-right">
 <a href="course.html" class="nav-top">Course</a>
 <a href="quiz.html" class="nav-top active">Quiz</a>
 </div>
 
-<!-- Main -->
-<section class="wrap">
-
-<h1 class="logo">📝 StarZ Quiz</h1>
-<p class="subtitle">ทดสอบความรู้ด้านดาราศาสตร์</p>
-
-<div class="quiz-card">
-
-<div class="question">
-ดาวเคราะห์ดวงใดอยู่ใกล้ดวงอาทิตย์มากที่สุด?
-</div>
-
-<div class="answers">
-<button onclick="checkAnswer(false)">โลก</button>
-<button onclick="checkAnswer(true)">ดาวพุธ</button>
-<button onclick="checkAnswer(false)">ดาวอังคาร</button>
-<button onclick="checkAnswer(false)">ดาวศุกร์</button>
-</div>
-
-<div class="result" id="result"></div>
-
-</div>
-
-</section>
+<div class="card" id="app"></div>
 
 <script>
-function checkAnswer(correct){
-const result = document.getElementById("result");
+const quiz = [
 
-if(correct){
-result.innerHTML = "✅ ถูกต้อง! ดาวพุธอยู่ใกล้ดวงอาทิตย์ที่สุด";
-result.style.color = "#8cffb0";
-}else{
-result.innerHTML = "❌ ยังไม่ถูก ลองใหม่อีกครั้ง";
-result.style.color = "#ff9b9b";
+{q:"อวกาศหมายถึงบริเวณใด?",a:["บริเวณนอกชั้นบรรยากาศโลก","บริเวณใต้เปลือกโลก","บริเวณชั้นหินหนืด","บริเวณแก่นโลก"],c:0},
+{q:"สภาพของอวกาศใกล้เคียงข้อใดมากที่สุด?",a:["สุญญากาศ","ของเหลว","บรรยากาศหนาแน่น","ไอน้ำร้อน"],c:0},
+{q:"เหตุใดเสียงจึงเดินทางในอวกาศได้ยาก?",a:["ไม่มีตัวกลางเพียงพอ","ไม่มีแรงโน้มถ่วง","มีแสงน้อยเกินไป","มีอุณหภูมิสูงเกินไป"],c:0},
+{q:"มนุษย์จำเป็นต้องใช้อุปกรณ์ใดเมื่อปฏิบัติงานในอวกาศ?",a:["ชุดอวกาศ","เสื้อชูชีพ","หน้ากากดำน้ำ","เสื้อกันฝน"],c:0},
+
+{q:"เอกภพหมายถึงข้อใด?",a:["เฉพาะโลกและดวงจันทร์","ทุกสิ่งทุกอย่างที่มีอยู่","เฉพาะระบบสุริยะ","เฉพาะกาแล็กซี"],c:1},
+{q:"ทฤษฎีที่ได้รับการยอมรับในการอธิบายกำเนิดเอกภพคือข้อใด?",a:["ทฤษฎีบิกแบง","ทฤษฎีโลกแบน","ทฤษฎีแรงดันโลก","ทฤษฎีดวงอาทิตย์คงที่"],c:0},
+{q:"หลักฐานสำคัญที่สนับสนุนทฤษฎีบิกแบงคือข้อใด?",a:["การขยายตัวของเอกภพ","โลกหมุนรอบตัวเอง","ดวงจันทร์โคจรรอบโลก","ฤดูกาลเปลี่ยนแปลง"],c:0},
+{q:"อายุของเอกภพในปัจจุบันประมาณเท่าใด?",a:["4,600 ล้านปี","13,800 ล้านปี","1 ล้านปี","100 ล้านปี"],c:1},
+
+{q:"กาแล็กซีคืออะไร?",a:["ระบบที่ประกอบด้วยดาวฤกษ์ เนบิวลา และสสารระหว่างดาว","ดาวเคราะห์ขนาดใหญ่","กลุ่มดาวที่มองเห็นจากโลกเท่านั้น","หลุมดำขนาดยักษ์"],c:0},
+{q:"ระบบสุริยะอยู่ในกาแล็กซีใด?",a:["แอนโดรเมดา","ทางช้างเผือก","แมกเจลแลนใหญ่","สามเหลี่ยม"],c:1},
+{q:"กาแล็กซีทางช้างเผือกจัดเป็นกาแล็กซีชนิดใด?",a:["กังหันมีคาน","วงรี","ไร้รูปแบบ","ทรงกลม"],c:0},
+{q:"เมื่อมองจากโลก ทางช้างเผือกมีลักษณะอย่างไร?",a:["แถบฝ้าสีขาวจางพาดบนท้องฟ้า","วงแหวนสีแดงรอบโลก","จุดสว่างดวงเดียว","เมฆดำทึบ"],c:0},
+
+{q:"ระบบสุริยะมีวัตถุใดเป็นศูนย์กลาง?",a:["โลก","ดวงอาทิตย์","ดาวพฤหัสบดี","ดวงจันทร์"],c:1},
+{q:"ระบบสุริยะเกิดขึ้นเมื่อประมาณเท่าใด?",a:["13,800 ล้านปี","4,600 ล้านปี","500 ล้านปี","10,000 ปี"],c:1},
+{q:"ดาวเคราะห์ในระบบสุริยะมีทั้งหมดกี่ดวง?",a:["7 ดวง","8 ดวง","9 ดวง","10 ดวง"],c:1},
+{q:"ข้อใดเป็นสมาชิกของระบบสุริยะ?",a:["ดาวหาง","กาแล็กซีอื่น","เนบิวลาทุกแห่ง","กระจุกกาแล็กซี"],c:0},
+
+{q:"ดาวเคราะห์ดวงใดอยู่ใกล้ดวงอาทิตย์มากที่สุด?",a:["ดาวศุกร์","ดาวพุธ","โลก","ดาวอังคาร"],c:1},
+{q:"ดาวเคราะห์ดวงใดมีขนาดใหญ่ที่สุดในระบบสุริยะ?",a:["ดาวเสาร์","ดาวพฤหัสบดี","ดาวยูเรนัส","โลก"],c:1},
+{q:"ดาวเคราะห์สีแดงคือข้อใด?",a:["ดาวพุธ","ดาวอังคาร","ดาวศุกร์","ดาวเนปจูน"],c:1},
+{q:"โลกเป็นดาวเคราะห์ลำดับที่เท่าใดจากดวงอาทิตย์?",a:["ลำดับที่ 2","ลำดับที่ 3","ลำดับที่ 4","ลำดับที่ 5"],c:1},
+
+{q:"ดาวเคราะห์ดวงใดมีวงแหวนเด่นชัดที่สุด?",a:["ดาวเสาร์","ดาวอังคาร","โลก","ดาวพุธ"],c:0},
+{q:"ข้อใดเป็นดาวเคราะห์ชั้นใน?",a:["โลก","ดาวพฤหัสบดี","ดาวเสาร์","ดาวเนปจูน"],c:0},
+{q:"ข้อใดเป็นดาวเคราะห์ชั้นนอก?",a:["ดาวศุกร์","ดาวอังคาร","ดาวพฤหัสบดี","โลก"],c:2},
+{q:"ดาวเคราะห์ชั้นนอกส่วนใหญ่มีลักษณะอย่างไร?",a:["เป็นดาวเคราะห์แก๊สหรือยักษ์น้ำแข็ง","เป็นดาวเคราะห์หินทั้งหมด","ไม่มีดวงจันทร์","ไม่มีแรงโน้มถ่วง"],c:0},
+
+{q:"ดวงอาทิตย์จัดเป็นวัตถุประเภทใด?",a:["ดาวเคราะห์","ดาวฤกษ์","ดาวเคราะห์แคระ","เนบิวลา"],c:1},
+{q:"ดาวฤกษ์แตกต่างจากดาวเคราะห์อย่างไร?",a:["ดาวฤกษ์เปล่งพลังงานได้เอง","ดาวฤกษ์ไม่มีมวล","ดาวฤกษ์ไม่มีแรงโน้มถ่วง","ดาวฤกษ์โคจรรอบโลก"],c:0},
+{q:"พลังงานของดาวฤกษ์เกิดจากกระบวนการใด?",a:["นิวเคลียร์ฟิวชัน","การเผาไหม้ถ่านหิน","การสะท้อนแสง","แรงเสียดทาน"],c:0},
+{q:"สีของดาวฤกษ์สัมพันธ์กับสิ่งใดมากที่สุด?",a:["อุณหภูมิผิว","จำนวนดวงจันทร์","ขนาดของวงโคจร","ระยะห่างจากโลก"],c:0},
+
+{q:"เนบิวลาคืออะไร?",a:["กลุ่มก๊าซและฝุ่นในอวกาศ","ดาวเคราะห์เกิดใหม่","หลุมดำขนาดเล็ก","ชั้นบรรยากาศโลก"],c:0},
+{q:"เนบิวลามีความสำคัญอย่างไร?",a:["เป็นแหล่งกำเนิดดาวฤกษ์","เป็นศูนย์กลางทุกกาแล็กซี","เป็นแหล่งกำเนิดมหาสมุทร","เป็นต้นกำเนิดแรงโน้มถ่วงโลก"],c:0},
+{q:"โปรโตสตาร์หมายถึงข้อใด?",a:["ดาวฤกษ์ก่อนเข้าสู่ระยะสมบูรณ์","ดาวฤกษ์ที่ดับแล้ว","ดาวเคราะห์แคระ","ดาวคู่"],c:0},
+{q:"ดวงอาทิตย์อยู่ในช่วงใดของวงจรชีวิตดาวฤกษ์?",a:["ดาวฤกษ์ลำดับหลัก","ดาวยักษ์แดง","ดาวแคระขาว","ซูเปอร์โนวา"],c:0},
+
+{q:"หลุมดำคืออะไร?",a:["วัตถุที่มีแรงโน้มถ่วงสูงมาก","โพรงอากาศในอวกาศ","ดาวเคราะห์ที่ไร้แสง","กลุ่มฝุ่นเย็น"],c:0},
+{q:"บริเวณรอบหลุมดำที่แม้แสงก็หลุดออกมาไม่ได้เรียกว่าอะไร?",a:["ขอบฟ้าเหตุการณ์","ชั้นโอโซน","เขตวงแหวน","แกนกาแล็กซี"],c:0},
+{q:"หลุมดำจำนวนมากเกิดจากเหตุการณ์ใด?",a:["ดาวฤกษ์มวลมากยุบตัว","ดาวหางละลาย","โลกชนดวงจันทร์","เนบิวลาหายไป"],c:0},
+{q:"นักวิทยาศาสตร์มักศึกษาหลุมดำจากสิ่งใด?",a:["ผลกระทบต่อวัตถุรอบข้าง","การมองเห็นพื้นผิวโดยตรง","เสียงระเบิด","สีของพื้นผิว"],c:0},
+
+{q:"ข้อใดเป็นประโยชน์สำคัญของดาวเทียม?",a:["การสื่อสารและพยากรณ์อากาศ","เพิ่มออกซิเจนให้โลก","สร้างภูเขาไฟ","เพิ่มแรงโน้มถ่วงโลก"],c:0},
+{q:"พาหนะที่ใช้ส่งวัตถุสู่อวกาศคืออะไร?",a:["จรวด","เรือดำน้ำ","รถไฟ","บอลลูนอากาศร้อน"],c:0},
+{q:"ISS ย่อมาจากข้อใด?",a:["สถานีอวกาศนานาชาติ","ระบบดาวเทียมสากล","ศูนย์สำรวจสุริยะ","ยานอวกาศอัจฉริยะ"],c:0},
+{q:"นักบินอวกาศคือบุคคลประเภทใด?",a:["ผู้ได้รับการฝึกเพื่อปฏิบัติงานในอวกาศ","ผู้ควบคุมสภาพอากาศ","ผู้สร้างดาวเทียมเท่านั้น","ผู้ศึกษาแร่ใต้ดิน"],c:0}
+
+];
+
+let current=0;
+let userAns=new Array(quiz.length).fill(null);
+
+function render(){
+const app=document.getElementById("app");
+
+if(current===quiz.length){
+let score=0;
+for(let i=0;i<quiz.length;i++){
+if(userAns[i]===quiz[i].c) score++;
 }
+
+app.innerHTML=`
+<div class="result">
+<h1>✨ เสร็จแล้ว ✨</h1>
+คะแนน ${score} / ${quiz.length}<br>
+${
+score<=10 ? "เริ่มต้นได้ดี ยังไปต่อได้อีก 🚀" :
+score<=20 ? "มาถูกทางแล้ว พยายามต่อนะ 🌟" :
+score<=30 ? "เก่งมาก ความรู้แน่นขึ้นแล้ว 🔥" :
+"สุดยอดมาก ทำได้ดีเยี่ยม 👑"
+}<br><br>
+<a href="course.html" style="color:#8ea2ff">กลับไปเรียน</a>
+</div>
+`;
+return;
 }
+
+const item=quiz[current];
+
+app.innerHTML=`
+<h1>StarZ Quiz</h1>
+<div class="progress">ข้อ ${current+1} / ${quiz.length}</div>
+<div class="question">${item.q}</div>
+
+<div class="answers">
+${item.a.map((choice,i)=>
+`<button class="${userAns[current]===i?'selected':''}"
+onclick="selectAns(${i})">${choice}</button>`
+).join("")}
+</div>
+
+<div class="nav">
+<button onclick="prevQ()">ย้อนกลับ</button>
+<button onclick="nextQ()">ถัดไป</button>
+</div>
+`;
+}
+
+function selectAns(i){
+userAns[current]=i;
+render();
+}
+
+function nextQ(){
+current++;
+render();
+}
+
+function prevQ(){
+if(current>0) current--;
+render();
+}
+
+render();
 </script>
-
 </body>
 </html>
