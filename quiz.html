@@ -161,55 +161,67 @@ opacity:.9;
 @media (max-width:768px){
 
 body{
-padding:14px;
+display:block;
+padding:12px;
 overflow:auto;
 }
 
-.wrap{
-padding:16px;
-justify-content:flex-start;
-padding-top:90px;
+.brand{
+position:static;
+display:block;
+font-size:32px;
+margin-bottom:10px;
 }
 
 .top-right{
-top:14px;
-right:14px;
-gap:8px;
+position:static;
+display:flex;
+gap:10px;
+margin-bottom:12px;
 }
 
 .nav-top{
-min-width:78px;
-height:40px;
-font-size:14px;
-padding:8px 12px;
+flex:1;
+min-width:0;
+height:42px;
+font-size:15px;
 }
 
-.progress{
-top:18px;
-left:14px;
-font-size:14px;
+.card{
+max-width:none;
+width:100%;
+padding:20px;
+border-radius:22px;
 }
 
 h1{
-font-size:24px;
+font-size:26px;
 }
 
-p{
-font-size:15px;
-line-height:1.6;
+.progress{
+font-size:16px;
+margin-bottom:14px;
 }
 
-.image-box{
-height:180px;
+.question{
+font-size:30px;
+line-height:1.35;
+}
+
+.answers button{
+font-size:20px;
+padding:18px;
+border-radius:16px;
 }
 
 .nav{
-width:100%;
 flex-direction:column;
 }
 
 .nav button{
 width:100%;
+font-size:18px;
+padding:16px;
 }
 }
 </style>

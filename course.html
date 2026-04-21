@@ -145,55 +145,59 @@ opacity:.9;
 @media (max-width:768px){
 
 body{
-padding:14px;
 overflow:auto;
+padding:12px;
 }
 
-.wrap{
-padding:16px;
+.view{
 justify-content:flex-start;
-padding-top:90px;
+padding:90px 12px 30px;
+}
+
+.brand{
+position:static;
+font-size:32px;
+margin-bottom:8px;
 }
 
 .top-right{
-top:14px;
-right:14px;
-gap:8px;
+position:static;
+width:100%;
+display:flex;
+gap:10px;
+margin-bottom:10px;
 }
 
 .nav-top{
-min-width:78px;
-height:40px;
-font-size:14px;
-padding:8px 12px;
-}
-
-.progress{
-top:18px;
-left:14px;
-font-size:14px;
-}
-
-h1{
-font-size:24px;
-}
-
-p{
+flex:1;
+min-width:0;
+height:42px;
 font-size:15px;
-line-height:1.6;
 }
 
-.image-box{
-height:180px;
+.subtitle{
+font-size:16px;
+text-align:center;
+margin-bottom:12px;
 }
 
-.nav{
+.menu-grid{
+grid-template-columns:1fr;
 width:100%;
-flex-direction:column;
+gap:12px;
 }
 
-.nav button{
-width:100%;
+.menu-btn{
+min-height:72px;
+font-size:24px;
+padding:14px;
+}
+
+.footer{
+position:static;
+margin-top:18px;
+font-size:12px;
+text-align:center;
 }
 }
 </style>
