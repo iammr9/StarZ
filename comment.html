@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starry Comment</title>
+
+  <!-- ใช้ธีมเดิม -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="page.css">
+
+  <style>
+    .community-view{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:24px;
+    }
+
+    .community-card{
+      width:100%;
+      max-width:620px;
+
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+
+      border-radius:26px;
+      padding:22px;
+      z-index:1;
+    }
+
+    .community-title{
+      text-align:center;
+      font-size:42px;
+      margin:0 0 4px;
+    }
+
+    .community-sub{
+      text-align:center;
+      opacity:0.8;
+      margin-bottom:14px;
+    }
+
+    .post-box{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .post-box input,
+    .post-box textarea{
+      width:100%;
+      padding:14px 16px;
+      border:none;
+      outline:none;
+
+      border-radius:14px;
+      background:rgba(255,255,255,0.06);
+      color:#fff;
+      font-size:16px;
+    }
+
+    .post-box textarea{
+      min-height:80px;
+      resize:none;
+    }
+
+    .post-box input::placeholder,
+    .post-box textarea::placeholder{
+      color:rgba(255,255,255,0.6);
+    }
+
+    .post-box button{
+      padding:14px;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
+
+      background:#5e72eb;
+      color:#fff;
+      font-size:16px;
+      transition:0.2s;
+    }
+
+    .post-box button:hover{
+      transform:translateY(-2px);
+    }
+
+    .comment-list{
+      display:grid;
+      gap:14px;
+    }
+
+    .comment-item{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .comment-name{
+      font-weight:700;
+      margin-bottom:6px;
+    }
+
+    .comment-time{
+      font-size:13px;
+      opacity:0.55;
+      margin-bottom:8px;
+    }
+
+    .comment-text{
+      line-height:1.6;
+      opacity:0.95;
+    }
+
+    .note{
+      margin-top:22px;
+      text-align:center;
+      font-size:13px;
+      opacity:0.6;
+    }
+
+    @media (max-width:768px){
+
+      .community-view{
+        align-items:flex-start;
+        padding:12px;
+      }
+
+      .community-card{
+        padding:24px;
+      }
+
+      .community-title{
+        font-size:34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="index.html" class="brand">✦Starry✦</a>
+
+  <div class="top-right">
+    <a href="course.html" class="nav-top">Course</a>
+    <a href="quiz.html" class="nav-top">Quiz</a>
+    <a href="comment.html" class="nav-top active">Comment</a>
+    <a href="login.html" class="nav-top">Login</a>
+  </div>
+
+  <section class="community-view">
+
+    <div class="community-card">
+
+      <h1 class="community-title">Community</h1>
+
+      <p class="community-sub">
+        พื้นที่สำหรับการแสดงความคิดเห็นของสมาชิก
+      </p>
+
+      <div class="post-box">
+
+        <input type="text" placeholder="แสดงความคิดเห็น . . .">
+
+        <!-- <textarea placeholder="พิมพ์ความคิดเห็น หรือเสนอหัวข้อที่อยากให้เพิ่ม..."></textarea> -->
+
+        <button type="button">โพสต์ความคิดเห็น</button>
+
+      </div>
+
+      <div class="comment-list">
+
+        <div class="comment-item">
+          <div class="comment-name">Astronaut1</div>
+          <div class="comment-time">2 นาทีที่แล้ว</div>
+          <div class="comment-text">
+            อยากให้เพิ่มหัวข้อเกี่ยวกับกาแล็กซีแอนดรอเมดาครับ
+          </div>
+        </div>
+
+        <div class="comment-item">
+          <div class="comment-name">Astronaut2</div>
+          <div class="comment-time">10 นาทีที่แล้ว</div>
+          <div class="comment-text">
+            เนื้อหายังไม่ครบนะคะ
+          </div>
+        </div>
+
+        <div class="comment-item">
+          <div class="comment-name">Astronaut3</div>
+          <div class="comment-time">25 นาทีที่แล้ว</div>
+          <div class="comment-text">
+            เทคโนโลยีอวกาศรูปไม่โหลดครับ
+          </div>
+        </div>
+
+      </div>
+
+      <div class="note">
+        * หน้านี้เป็นต้นแบบสำหรับพัฒนาระบบสมาชิกและการแสดงความคิดเห็นในอนาคต
+      </div>
+
+    </div>
+
+  </section>
+
+</body>
+</html>

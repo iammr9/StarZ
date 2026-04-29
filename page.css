@@ -1,11 +1,7 @@
-/* ==================================
-   page.css
-   ใช้กับ index / course / quiz
-================================== */
-
-/* =========================
-   INDEX
-========================= */
+   /* page.css
+   ใช้กับ index / course / quiz */
+   
+   /* INDEX */
 
 .box {
   text-align: center;
@@ -50,9 +46,7 @@
   transform: translateY(-3px) scale(1.03);
 }
 
-/* =========================
-   COURSE
-========================= */
+ /* COURSE */
 
 .view {
   min-height: 100vh;
@@ -117,9 +111,7 @@
   font-size: 12px;
 }
 
-/* =========================
-   QUIZ
-========================= */
+/* Quiz */
 
 .quiz-view {
   min-height: 100vh;

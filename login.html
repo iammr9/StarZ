@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starry Login</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="page.css">
+
+  <style>
+    
+    .login-view{
+      min-height: 100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:24px;
+    }
+
+    .login-card{
+      width:100%;
+      max-width:460px;
+
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+
+      border-radius:28px;
+      padding:34px;
+      z-index:1;
+      text-align:center;
+    }
+
+    .login-card h1{
+      margin:0 0 10px;
+      font-size:42px;
+    }
+
+    .login-card p{
+      opacity:0.85;
+      margin-bottom:24px;
+    }
+
+    .login-form{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .login-form input{
+      width:100%;
+      padding:14px 16px;
+
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.12);
+
+      background:rgba(255,255,255,0.06);
+      color:#fff;
+      font-size:16px;
+      outline:none;
+    }
+
+    .login-form input::placeholder{
+      color:rgba(255,255,255,0.65);
+    }
+
+    .login-form button{
+      padding:14px;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
+
+      background:#5e72eb;
+      color:#fff;
+      font-size:16px;
+      transition:0.2s;
+    }
+
+    .login-form button:hover{
+      transform:translateY(-2px);
+    }
+
+    .login-links{
+      margin-top:18px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .login-links a{
+      color:#8ea2ff;
+      text-decoration:none;
+      font-size:15px;
+    }
+
+    .note{
+      margin-top:18px;
+      font-size:13px;
+      opacity:0.6;
+    }
+
+    @media (max-width:768px){
+
+      .login-view{
+        align-items:flex-start;
+        padding:12px;
+      }
+
+      .login-card{
+        padding:26px;
+      }
+
+      .login-card h1{
+        font-size:34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="index.html" class="brand">✦Starry✦</a>
+
+  <div class="top-right">
+    <a href="course.html" class="nav-top">Course</a>
+    <a href="quiz.html" class="nav-top">Quiz</a>
+    <a href="comment.html" class="nav-top">Comment</a>
+    <a href="login.html" class="nav-top active">Login</a>
+  </div>
+
+  <section class="login-view">
+
+    <div class="login-card">
+
+      <h1>Login</h1>
+
+      <p>เข้าสู่ระบบเพื่อเริ่มสำรวจจักรวาล</p>
+
+      <form class="login-form">
+
+        <input type="text" placeholder="ชื่อผู้ใช้">
+
+        <input type="password" placeholder="รหัสผ่าน">
+
+        <button type="button">เข้าสู่ระบบ</button>
+
+      </form>
+
+      <div class="login-links">
+        <a href="register.html">สมัครสมาชิก</a>
+        <a href="index.html">กลับหน้าแรก</a>
+      </div>
+
+
+    </div>
+
+  </section>
+
+</body>
+</html>
