@@ -126,7 +126,7 @@
     <a href="course.html" class="nav-top">Course</a>
     <a href="quiz.html" class="nav-top">Quiz</a>
     <a href="comment.html" class="nav-top">Comment</a>
-    <a href="login.html" class="nav-top active">Login</a>
+    <a href="login.html" id="userBtn" class="nav-top">Login</a>
   </div>
 
   <section class="login-view">
@@ -139,13 +139,11 @@
 
       <form class="login-form">
 
-        <input type="text" placeholder="ชื่อผู้ใช้">
+        <input id="regUser" placeholder="Username">
 
-        <input type="text" placeholder="อีเมล">
+        <input id="regPass" type="password" placeholder="Password">
 
-        <input type="password" placeholder="รหัสผ่าน">
-
-        <button type="button">สมัครสมาชิก</button>
+        <button type="button" onclick="register()">Register</button>
 
       </form>
 
@@ -158,6 +156,36 @@
     </div>
 
   </section>
+<script>
+  function register(){
+  const u = regUser.value.trim();
+  const p = regPass.value;
 
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  if(users.find(x => x.username === u)){
+    alert("มีผู้ใช้นี้แล้ว");
+    return;
+  }
+
+  users.push({username:u, password:p});
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("สมัครสำเร็จ");
+  location.href = "login.html";
+}
+
+function getCurrentUser(){
+  return JSON.parse(localStorage.getItem("currentUser"));
+}
+
+const user = JSON.parse(localStorage.getItem("currentUser"));
+const btn = document.getElementById("userBtn");
+
+if(user){
+  btn.innerText = user.username;   // เปลี่ยนเป็นชื่อ
+  btn.href = "profile.html";       // กดไปหน้า profile
+}
+</script>
 </body>
 </html>

@@ -149,7 +149,7 @@
     <a href="course.html" class="nav-top">Course</a>
     <a href="quiz.html" class="nav-top">Quiz</a>
     <a href="comment.html" class="nav-top active">Comment</a>
-    <a href="login.html" class="nav-top">Login</a>
+    <a href="login.html" id="userBtn" class="nav-top">Login</a>
   </div>
 
   <section class="community-view">
@@ -164,15 +164,19 @@
 
       <div class="post-box">
 
-        <input type="text" placeholder="แสดงความคิดเห็น . . .">
+        <textarea id="msg" placeholder="แสดงความคิดเห็น . . ."></textarea>
 
         <!-- <textarea placeholder="พิมพ์ความคิดเห็น หรือเสนอหัวข้อที่อยากให้เพิ่ม..."></textarea> -->
 
-        <button type="button">โพสต์ความคิดเห็น</button>
+        <button onclick="postComment()">โพสต์</button>
+
+        <!-- <div id="list"></div> -->
 
       </div>
 
-      <div class="comment-list">
+
+      <div id="list" class="comment-list"></div>
+      <!-- <div class="comment-list">
 
         <div class="comment-item">
           <div class="comment-name">Astronaut1</div>
@@ -198,7 +202,7 @@
           </div>
         </div>
 
-      </div>
+      </div> -->
 
       <div class="note">
         * หน้านี้เป็นต้นแบบสำหรับพัฒนาระบบสมาชิกและการแสดงความคิดเห็นในอนาคต
@@ -207,6 +211,59 @@
     </div>
 
   </section>
+  <script>
+    function postComment(){
+  const user = getCurrentUser();
 
+  if(!user){
+    alert("ต้อง login ก่อน");
+    return;
+  }
+
+  const text = msg.value.trim();
+  if(!text) return;
+
+  let comments =
+   JSON.parse(localStorage.getItem("comments")) || [];
+
+  comments.push({
+    user: user.username,
+    text: text,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("comments", JSON.stringify(comments));
+
+  msg.value = "";
+  renderComments();
+}
+
+function renderComments(){
+  let comments =
+   JSON.parse(localStorage.getItem("comments")) || [];
+
+  list.innerHTML = comments.map(c => `
+    <div class="comment-item">
+      <b>${c.user}</b>
+      <div>${c.text}</div>
+      <small>${c.date}</small>
+    </div>
+  `).join("");
+}
+
+renderComments();
+
+function getCurrentUser(){
+  return JSON.parse(localStorage.getItem("currentUser"));
+}
+
+const user = JSON.parse(localStorage.getItem("currentUser"));
+const btn = document.getElementById("userBtn");
+
+if(user){
+  btn.innerText = user.username;   // เปลี่ยนเป็นชื่อ
+  btn.href = "profile.html";       // กดไปหน้า profile
+}
+  </script>
 </body>
 </html>

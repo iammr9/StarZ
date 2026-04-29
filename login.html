@@ -126,7 +126,7 @@
     <a href="course.html" class="nav-top">Course</a>
     <a href="quiz.html" class="nav-top">Quiz</a>
     <a href="comment.html" class="nav-top">Comment</a>
-    <a href="login.html" class="nav-top active">Login</a>
+    <a href="login.html" id="userBtn" class="nav-top">Login</a>
   </div>
 
   <section class="login-view">
@@ -139,11 +139,11 @@
 
       <form class="login-form">
 
-        <input type="text" placeholder="ชื่อผู้ใช้">
+        <input id="logUser" placeholder="Username">
 
-        <input type="password" placeholder="รหัสผ่าน">
+        <input id="logPass" type="password" placeholder="Password">
 
-        <button type="button">เข้าสู่ระบบ</button>
+        <button type="button" onclick="login()">Login</button>
 
       </form>
 
@@ -156,6 +156,35 @@
     </div>
 
   </section>
+<script>
+  function login(){
+  const u = logUser.value.trim();
+  const p = logPass.value;
 
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  const found = users.find(x => x.username === u && x.password === p);
+
+  if(found){
+    localStorage.setItem("currentUser", JSON.stringify(found));
+    alert("เข้าสู่ระบบสำเร็จ");
+    location.href = "course.html";
+  }else{
+    alert("ข้อมูลไม่ถูกต้อง");
+  }
+}
+
+function getCurrentUser(){
+  return JSON.parse(localStorage.getItem("currentUser"));
+}
+
+const user = JSON.parse(localStorage.getItem("currentUser"));
+const btn = document.getElementById("userBtn");
+
+if(user){
+  btn.innerText = user.username;   // เปลี่ยนเป็นชื่อ
+  btn.href = "profile.html";       // กดไปหน้า profile
+}
+</script>
 </body>
 </html>

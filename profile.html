@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starry Profile</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="page.css">
+
+<style>
+.profile-view{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:24px;
+}
+
+.profile-card{
+  width:100%;
+  max-width:460px;
+
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+
+  border-radius:28px;
+  padding:30px;
+  text-align:center;
+}
+
+.profile-card h1{
+  margin-bottom:10px;
+}
+
+.profile-info{
+  margin:20px 0;
+  font-size:18px;
+}
+
+.logout-btn{
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+
+  background:#5e72eb;
+  color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<a href="index.html" class="brand">✦Starry✦</a>
+
+<div class="top-right">
+  <a href="course.html" class="nav-top">Course</a>
+  <a href="quiz.html" class="nav-top">Quiz</a>
+  <a href="comment.html" class="nav-top">Comment</a>
+  <a href="login.html" id="userBtn" class="nav-top">Login</a>
+</div>
+
+<section class="profile-view">
+
+  <div class="profile-card">
+
+    <h1>Profile</h1>
+
+    <div id="profileName" class="profile-info"></div>
+
+    <button class="logout-btn" onclick="logout()">
+      Logout
+    </button>
+
+  </div>
+
+</section>
+
+<script>
+
+const user = JSON.parse(localStorage.getItem("currentUser"));
+const btn = document.getElementById("userBtn");
+
+if(user){
+  // เปลี่ยนชื่อบนเมนู
+  btn.innerText = user.username;
+  btn.href = "profile.html";
+
+  // แสดงชื่อในหน้า profile
+  document.getElementById("profileName").innerText =
+    "Username: " + user.username;
+}else{
+  alert("กรุณาเข้าสู่ระบบก่อน");
+  location.href = "login.html";
+}
+
+// logout
+function logout(){
+  localStorage.removeItem("currentUser");
+  alert("ออกจากระบบแล้ว");
+  location.href = "index.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -17,7 +17,7 @@
       <a href="course.html" class="nav-top">Course</a>
       <a href="quiz.html" class="nav-top active">Quiz</a>
       <a href="comment.html" class="nav-top">Comment</a>
-      <a href="login.html" class="nav-top">Login</a>
+      <a href="login.html" id="userBtn" class="nav-top">Login</a>
     </div>
     <section class="view">
       <div class="card" id="app"></div>
@@ -407,6 +407,18 @@ onclick="selectAns(${i})">${choice}</button>`,
       }
 
       render();
+
+      function getCurrentUser(){
+  return JSON.parse(localStorage.getItem("currentUser"));
+}
+
+const user = JSON.parse(localStorage.getItem("currentUser"));
+const btn = document.getElementById("userBtn");
+
+if(user){
+  btn.innerText = user.username;   // เปลี่ยนเป็นชื่อ
+  btn.href = "profile.html";       // กดไปหน้า profile
+}
     </script>
   </body>
 </html>
